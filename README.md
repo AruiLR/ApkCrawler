@@ -12,6 +12,12 @@
   # add arguments to control browser behaviors
   
   options=Options()
-  options.add_argument('--headless')  # no need GUI of browser
-  options.add_argument('--no-sandbox')
-  driver=webdriver.Chrome()
+  options.add_argument('--headless')  # no need GUI of browser, use driver of browser
+  options.add_argument('--no-sandbox') 
+  driver=webdriver.Chrome(executable_path='/usr/bin/chromedriver',chrome_options=options)
+  driver.get(url)
+  html_doc=driver.page_source
+  ...
+  
+  driver.find_element_by_link_text(u"下一页").click() #simulate browser to click the "下一页" button to next page
+  
