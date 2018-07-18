@@ -6,10 +6,11 @@ import sys
 from bs4 import BeautifulSoup
 import urllib
 from urllib import urlretrieve
-def report(count, blockSize, totalSize): # show download progress
-  percent = int(count*blockSize*100/totalSize)
-  sys.stdout.write("\r%d%%" % percent + ' complete')
-  sys.stdout.flush()
+def report(count, blockSize, totalSize):
+    # show download progress
+    percent = int(count*blockSize*100/totalSize)
+    sys.stdout.write("\r%d%%" % percent + ' complete')
+    sys.stdout.flush()
 def auto_down(download_link,apk_path):
     try:
         urlretrieve(download_link, apk_path, reporthook=report)
