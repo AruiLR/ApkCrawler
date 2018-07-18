@@ -1,5 +1,5 @@
 # Introduction
-  This is a APK crawler which is used to automatically download lots of android applications from several application markets, such as xiaomi, anzhi.
+  This is a APK crawler which is used to automatically download lots of android applications from several application markets, such as xiaomi, anruan, appchina.
 # Dependencies
 * [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) 
 * [Selenium](https://pypi.org/project/selenium/)
@@ -19,5 +19,8 @@
   html_doc=driver.page_source
   ...
   
-  driver.find_element_by_link_text(u"下一页").click() #simulate browser to click the "下一页" button to next page
+  driver.find_element_by_link_text(u"下一页").click() #simulate browser to click the "next" button to next page
+  driver.quit()
+  ```
+  
   
