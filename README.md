@@ -22,5 +22,4 @@
   driver.find_element_by_link_text(u"下一页").click() #simulate browser to click the "next" button to next page
   driver.quit()
   ```
-  adfasdfasdfasdf
   
