@@ -11,7 +11,8 @@ from selenium.webdriver.chrome.options import Options
 def getsource(url): # crawl page
     html = requests.get(url).text
     return html
-def get_href(root_url): # return all urls of every category range page one from last page
+def get_href(root_url):
+    # return all urls of every category range from page one to the last page
     category_url_dict={} #{category name:url}
     html_doc=getsource(root_url)
     soup=BeautifulSoup(html_doc,'html.parser')
@@ -23,10 +24,11 @@ def get_href(root_url): # return all urls of every category range page one from 
         category_url=root_url+category_string
         category_url_dict[category_name]=category_url
     return category_url_dict
-def report(count, blockSize, totalSize): # show download progress
-  percent = int(count*blockSize*100/totalSize)
-  sys.stdout.write("\r%d%%" % percent + ' complete')
-  sys.stdout.flush()
+def report(count, blockSize, totalSize):
+    #show download progress
+    percent = int(count*blockSize*100/totalSize)
+    sys.stdout.write("\r%d%%" % percent + ' complete')
+    sys.stdout.flush()
 def auto_redown(download_link,apk_path):
     try:
         urlretrieve(download_link, apk_path, reporthook=report)
@@ -35,10 +37,11 @@ def auto_redown(download_link,apk_path):
         auto_redown(download_link,apk_path)
     sys.stdout.write("\rDownload complete, saved as %s" % (apk_path) + '\n\n')
     sys.stdout.flush()
-def get_apk(root_url,url_dict,save_path):# root_url: address of market; url_dict:{category name:category url};save_path:where to save APKs
+def get_apk(root_url,url_dict,save_path):
+    #download APK
+    # root_url: address of market; url_dict:{category name:category url};save_path:where to save APKs
     conn = redis.Redis(host='localhost', port=6379)
     for category_name in url_dict:
-        apk_info={} #save apk information : {name:[vendor,downlink,pubkey]}
         new_path=os.path.join(save_path,category_name)
         if not os.path.exists(new_path):
             os.makedirs(new_path)
@@ -86,6 +89,7 @@ def get_apk(root_url,url_dict,save_path):# root_url: address of market; url_dict
                     continue
 if __name__=='__main__':
     root_url='http://app.mi.com'
-    save_path='#'
+    save_path='#' #path to save downloded apks
     name_url_dict=get_href(root_url)
     get_apk(root_url,name_url_dict,save_path)
+
